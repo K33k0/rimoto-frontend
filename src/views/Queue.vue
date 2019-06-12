@@ -1,28 +1,38 @@
 <template>
   <div class="container">
-    <b-table :data="info">
+    <b-button @click="getQueue">Fetch</b-button>
+
+    <b-table :data="isEmpty ? [] : info" :loading="isLoading">
       <template slot-scope="props">
         <b-table-column field="delete" label="Remove">
           <b-button class="is-success" @click="manualScan">Scan Now</b-button>
         </b-table-column>
         <b-table-column field="id" label="ID">{{ props.row.id }}</b-table-column>
         <b-table-column field="path" label="Path">
-          <b-tooltip :label="props.row.remote_path">
-            {{ props.row.path }}
-          </b-tooltip>
+          <b-tooltip :label="props.row.remote_path">{{ props.row.path }}</b-tooltip>
         </b-table-column>
         <b-table-column field="library_name" label="Library">
-          <b-tooltip :label="props.row.library_id | toString">
-            {{ props.row.library_name }}
-          </b-tooltip>
+          <b-tooltip :label="props.row.library_id | toString">{{ props.row.library_name }}</b-tooltip>
         </b-table-column>
-        <b-table-column field="downloaded_at" label="Download Time">{{ props.row.downloaded_at | formatDate }}</b-table-column>
+        <b-table-column
+          field="downloaded_at"
+          label="Download Time"
+        >{{ props.row.downloaded_at | formatDate }}</b-table-column>
         <b-table-column field="delete" label="Remove">
           <b-button class="is-danger" @click="deleteFromQueue">Remove</b-button>
         </b-table-column>
       </template>
+      <template slot="empty">
+        <section class="section">
+          <div class="content has-text-grey has-text-centered">
+            <p>
+              <b-icon icon="emoticon-sad" size="is-large"></b-icon>
+            </p>
+            <p>Nothing here.</p>
+          </div>
+        </section>
+      </template>
     </b-table>
-    <b-button @click="getQueue">Fetch</b-button>
   </div>
 </template>
 
@@ -33,14 +43,23 @@ export default {
   name: "queue",
   data() {
     return {
-      info: []
+      info: [],
+      isLoading: false,
+      isEmpty: false,
     };
   },
   methods: {
     getQueue() {
+      this.isLoading = true
       axios
         .get("http://127.0.0.1:8000/queue")
-        .then(response => (this.info = response.data));
+        .then((response) => {
+          this.isLoading = false
+          this.info = response.data
+        })
+        .catch(()=> {
+          this.isLoading = false
+        })
     },
     deleteFromQueue(event) {
       let selectedRow =
