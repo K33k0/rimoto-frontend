@@ -1,13 +1,16 @@
 import Vue from 'vue';
 import './plugins/axios';
 import Buefy from 'buefy';
+import axios from 'axios';
 
 import App from './App.vue';
 import router from './router';
 import store from './store/index';
 import './assets/scss/app.scss';
 
+
 Vue.use(Buefy);
+Vue.use(axios);
 
 Vue.config.productionTip = false;
 
