@@ -37,57 +37,64 @@
 </template>
 
 <script>
-import axios from "axios";
-import moment from "moment"
+import moment from "moment";
 export default {
   name: "queue",
   data() {
     return {
       info: [],
       isLoading: false,
-      isEmpty: false,
+      isEmpty: false
     };
   },
   methods: {
     getQueue() {
-      this.isLoading = true
+      this.isLoading = true;
       axios
         .get("http://127.0.0.1:8000/queue")
-        .then((response) => {
-          this.isLoading = false
-          this.info = response.data
+        .then(response => {
+          this.isLoading = false;
+          this.info = response.data;
         })
-        .catch(()=> {
-          this.isLoading = false
-        })
+        .catch(() => {
+          this.isLoading = false;
+        });
     },
     deleteFromQueue(event) {
       let selectedRow =
         event.target.parentNode.parentNode.parentNode.parentNode;
       let path = selectedRow.children[2].innerText;
-      axios
-        .post("http://127.0.0.1:8000/delete", { file_path: path })
-        .then(response => (this.info = this.info.filter(function(obj) { return obj.path !== path;})));
+      axios.post("http://127.0.0.1:8000/delete", { file_path: path }).then(
+        response =>
+          (this.info = this.info.filter(function(obj) {
+            return obj.path !== path;
+          }))
+      );
     },
-    manualScan(event){
+    manualScan(event) {
       let row = event.target.parentNode.parentNode.parentNode.parentNode;
-      let section_id = row.children[3].firstChild.firstChild.dataset.label
-      let path = row.children[2].innerText
-      let id = row.children[1].innerText
-      console.log(section_id)
-      axios.post('http://127.0.0.1:8000/manualscan', {path: path, section_id: section_id, record_id:id})
-      .then(response => (this.getQueue()))
+      let section_id = row.children[3].firstChild.firstChild.dataset.label;
+      let path = row.children[2].innerText;
+      let id = row.children[1].innerText;
+      console.log(section_id);
+      axios
+        .post("http://127.0.0.1:8000/manualscan", {
+          path: path,
+          section_id: section_id,
+          record_id: id
+        })
+        .then(response => this.getQueue());
     }
   },
   filters: {
     formatDate: function(value) {
-      if (!value) return
-      return moment(String(value)).format('YYYY/MM/DD HH:mm')
+      if (!value) return;
+      return moment(String(value)).format("YYYY/MM/DD HH:mm");
     },
-    toString: function(value) {
-      if (!value) return
-      return value.toString()
-    }
-  }
+    toString: function (value) {
+      if (!value) return;
+      return value.toString();
+    },
+  },
 };
 </script>
