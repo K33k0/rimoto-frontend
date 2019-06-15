@@ -11,7 +11,7 @@ export default new Router({
     {
       path: '/',
       name: 'queue',
-      component: Queue
-    }
+      component: Queue,
+    },
   ],
 });
