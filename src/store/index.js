@@ -2,6 +2,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import NavBar from './modules/navBar';
+
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== 'production';
@@ -9,19 +11,26 @@ const debug = process.env.NODE_ENV !== 'production';
 export default new Vuex.Store({
   strict: debug,
   state: {
-    mainNavVis: false,
-  },
-  mutations: {
-    toggleMainNavVis(state) {
-      state.mainNavVis = !state.mainNavVis;
-    },
+    // queue: [],
   },
   getters: {
-    mainNavVis: state => state.mainNavVis,
+    // queue: state => state.queue,
+  },
+  mutations: {
+    // getQueue(state) {
+    //   this.$axios
+    //     .get('http://127.0.0.1:8000/queue')
+    //     .then((response) => {
+    //       state.queue = response.data;
+    //     });
+    // },
   },
   actions: {
-    toggleMainNavVis({ commit }) {
-      commit('toggleMainNavVis');
-    },
+    // getQueue({ commit }) {
+    //   commit('getQueue');
+    // },
+  },
+  modules: {
+    NavBar,
   },
 });
