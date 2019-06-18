@@ -1,22 +1,24 @@
 <template>
   <div class="container">
-    <b-button @click="getQueue">Fetch</b-button>
-    <k-table></k-table>
+    <k-tools></k-tools>
+    <!-- <k-table></k-table> -->
   </div>
 </template>
 
 <script>
-import queueTable from '@/components/queueTable.vue';
+// import queueTable from '@/components/queueTable.vue';
+import manualTools from '@/components/manualToolbar.vue';
 
 export default {
   name: 'queue',
   methods: {
     getQueue: () => {
-      this.$store.dispatch('getQueue');
+      // this.$store.dispatch('getQueue');
     },
   },
   components: {
-    'k-table': queueTable,
+    // 'k-table': queueTable,
+    'k-tools': manualTools,
   },
 };
 </script>

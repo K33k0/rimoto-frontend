@@ -10,7 +10,7 @@ import './assets/scss/app.scss';
 
 
 Vue.use(Buefy);
-Vue.use(axios);
+Vue.prototype.$axios = axios;
 
 Vue.config.productionTip = false;
 
