@@ -19,8 +19,8 @@ export default {
   name: 'manualTools',
   methods: {
     manualUpdate: () => {
-      console.log("manualUpdate")
-      this.$store.dispatch('ManualToolbar/getQueue');
+      const getQueue = 'https://127.0.0.1:8000/queue'
+      // this.$axios.get(getQueue).then(res =>)
     },
   },
 };

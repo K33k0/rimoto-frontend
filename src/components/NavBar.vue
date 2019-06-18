@@ -4,7 +4,7 @@
       <a
         role="button"
         class="navbar-burger"
-        :class="{'is-active': $store.getters.mainNavVis}"
+        :class="{'is-active': active}"
         @click="toggleMainNav"
       >
         <span aria-hidden="true"></span>
@@ -12,7 +12,7 @@
         <span aria-hidden="true"></span>
       </a>
     </div>
-    <div class="navbar-menu" :class="{'is-active': $store.getters.mainNavVis}">
+    <div class="navbar-menu" :class="{'is-active': active}">
       <div class="navbar-start">
         <router-link class="navbar-item" to="/">Home</router-link>
       </div>
@@ -24,9 +24,12 @@
 <script>
 
 export default {
+  data: () => ({
+    active: false
+  }),
   methods: {
     toggleMainNav: function() {
-      this.$store.dispatch('toggleMainNavVis')
+      this.active = !this.active
     }
   }
 };
