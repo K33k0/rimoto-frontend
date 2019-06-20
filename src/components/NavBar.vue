@@ -25,12 +25,12 @@
 
 export default {
   data: () => ({
-    active: false
+    active: false,
   }),
   methods: {
-    toggleMainNav: function() {
-      this.active = !this.active
-    }
-  }
+    toggleMainNav() {
+      this.active = !this.active;
+    },
+  },
 };
 </script>
