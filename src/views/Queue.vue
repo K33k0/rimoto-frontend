@@ -1,24 +1,18 @@
 <template>
   <div class="container">
-    <k-tools></k-tools>
-    <!-- <k-table></k-table> -->
+    <Q-Manual-Add/>
+    <Q-Table/>
   </div>
 </template>
 
 <script>
-// import queueTable from '@/components/queueTable.vue';
-import manualTools from '@/components/manualToolbar.vue';
+  import QTable from '@/components/QTable.vue';
+  import QManualAdd from '@/components/QmanualAdd.vue';
 
 export default {
-  name: 'queue',
-  methods: {
-    getQueue: () => {
-      // this.$store.dispatch('getQueue');
-    },
-  },
   components: {
-    // 'k-table': queueTable,
-    'k-tools': manualTools,
-  },
-};
+    QTable,
+    QManualAdd
+  }
+}
 </script>
