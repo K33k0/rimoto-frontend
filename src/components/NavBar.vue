@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar" role="navigation">
+  <nav class="navbar is-black" role="navigation">
     <div class="navbar-brand">
       <a
         role="button"
@@ -15,6 +15,8 @@
     <div class="navbar-menu" :class="{'is-active': active}">
       <div class="navbar-start">
         <router-link class="navbar-item" to="/">Home</router-link>
+        <router-link class="navbar-item" to="/queue">Queue</router-link>
+        <router-link class="navbar-item" to="/recent">Recently Added</router-link>
       </div>
       <div class="navbar-end"></div>
     </div>
