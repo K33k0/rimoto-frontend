@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import moment from 'moment'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
     queue: [],
-    updatingQueue: false
+    updatingQueue: false,
+    recentScanned: []
   },
   mutations: {
     toggleUpdatingState(state, bool) {state.updatingQueue = bool},
@@ -27,6 +29,12 @@ const store = new Vuex.Store({
       const dataUrl = "http://127.0.0.1:8000/delete"
       axios.post(dataUrl, {file_path: path})
       .then(resp => {
+      })
+    },
+    updateRecentScanned(state){
+      const dataUrl = 'http://127.0.0.1:8000/recent'
+      axios.get(dataUrl).then(resp => {
+        state.recentScanned = resp.data
       })
     }
   },

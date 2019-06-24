@@ -5,7 +5,7 @@
         <b-icon pack="fas" icon="sync" size="is-small"></b-icon>
       </button>
     </p>
-    <b-input placeholder="path" v-model="valuePath"></b-input>
+    <b-input placeholder="path" v-model="valuePath" @keyup.enter.native="addPath()"></b-input>
     <p class="control">
       <button class="button is-primary" @click="addPath()">
         <b-icon pack="fas" icon="plus-square" size="is-small" ></b-icon>
@@ -38,6 +38,7 @@ export default {
         this.$store.commit('toggleUpdatingState', false)
       })
       })
+      this.valuePath = null
     }
   },
   computed: mapState({
